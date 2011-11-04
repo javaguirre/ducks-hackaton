@@ -15,4 +15,21 @@ class DuckClientApi():
                             timeout = 5)
         print req.status_code
         print req.content
+        
+    def update_count(self, count):
+        #TODO returns True or False if its working
+        self.send({"value": count})
+
+    def update_tl(self, title, content, image = None):
+        if image:
+            data_image = image
+        else:
+            data_image = "https://dashboard.ducksboard.com/static/img/timeline/green.gif"
+
+        data = { "value": { "title": title, 
+                            "image": data_image,
+                            "content": content
+                }}
+        self.send(data)
+    
 
