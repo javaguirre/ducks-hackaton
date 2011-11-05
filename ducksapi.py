@@ -31,5 +31,12 @@ class DuckClientApi():
                             "content": content
                 }}
         self.send(data)
+        
+    def update_small_image(self, source, caption):
+        data = { "value": {"source": source, 
+                 "caption": caption,
+                }}
+        print json.dumps(data)
+        self.send(data)
     
 
