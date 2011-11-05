@@ -8,11 +8,15 @@ class GWeather():
     
     def __init__(self, city, country):
         #TODO parse city and country
+        self.url = "http://www.google.com/ig/api?weather"
         self.city = city
         self.country = country
     
-    def getData(self):
-        data = requests.get("http://www.google.com/ig/api?weather=%s+%s" % (self.city, self.country) )
+    def get_data(self):
+        current = dict()
+        forecast = []
+    
+        data = requests.get("%s=%s+%s" % (self.url, self.city, self.country) )
         doc = etree.fromstring(data.content)
         
         current_conditions = doc.findall("weather/current_conditions")
@@ -20,8 +24,14 @@ class GWeather():
         
         if current_conditions:
             for child in current_conditions[0].iterchildren():
-                print child.get("data")
+                current[child.tag] = child.get("data")
+                print child.tag
                 
         if forecast_conditions:
-            for child in forecast_conditions[0].iterchildren():
-                print child.get("data")
+            for forecast_elem in forecast_conditions:
+                aux = dict()
+                for child in forecast_elem.iterchildren():
+                    aux[child.tag] = child.get("data")
+                forecast.append(aux)
+        
+        return { "current": current, "forecast": forecast }

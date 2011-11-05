@@ -14,4 +14,4 @@ class BluePresence():
         ''' Look for a user in db.'''
         self.db.users.find_one( { "mac": mac } )
 
-discover_devices(lookup_names = True)
+#discover_devices(lookup_names = True)
