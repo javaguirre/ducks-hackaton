@@ -25,7 +25,6 @@ class GWeather():
         if current_conditions:
             for child in current_conditions[0].iterchildren():
                 current[child.tag] = child.get("data")
-                print child.tag
                 
         if forecast_conditions:
             for forecast_elem in forecast_conditions:
@@ -35,3 +34,7 @@ class GWeather():
                 forecast.append(aux)
         
         return { "current": current, "forecast": forecast }
+        
+    def convert_to_c(self, temp):
+        ''' Converts Fahrenheit to Celsius degrees'''
+        return str(round((int(temp) - 32) * (5.0/9.0), 2))
