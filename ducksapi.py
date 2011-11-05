@@ -36,7 +36,6 @@ class DuckClientApi():
         data = { "value": {"source": source, 
                  "caption": caption,
                 }}
-        print json.dumps(data)
         self.send(data)
     
 
